@@ -13,6 +13,8 @@
     </a>
 </p>
 
+#### Lightweight iOS 13 badge like with ease.
+
 ## Features
 - Highly customizable ✅
 - iPhone, iPhone X, & iPad Support ✅
