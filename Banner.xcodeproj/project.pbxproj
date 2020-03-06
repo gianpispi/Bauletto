@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D60E94242412D68000F7BDA4 /* Banner.h in Headers */ = {isa = PBXBuildFile; fileRef = D60E94222412D68000F7BDA4 /* Banner.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D60E94332412D6D700F7BDA4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60E94322412D6D700F7BDA4 /* AppDelegate.swift */; };
 		D60E94352412D6D700F7BDA4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60E94342412D6D700F7BDA4 /* SceneDelegate.swift */; };
 		D60E94372412D6D700F7BDA4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60E94362412D6D700F7BDA4 /* ViewController.swift */; };
@@ -20,6 +19,7 @@
 		D60E944F2412D72E00F7BDA4 /* FeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60E944B2412D72E00F7BDA4 /* FeedbackGenerator.swift */; };
 		D60E94502412D72E00F7BDA4 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60E944C2412D72E00F7BDA4 /* BannerView.swift */; };
 		D60E94512412D72E00F7BDA4 /* BannerDismissMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60E944D2412D72E00F7BDA4 /* BannerDismissMode.swift */; };
+		D60E94542412E02B00F7BDA4 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D60E94532412E02B00F7BDA4 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,8 +48,6 @@
 
 /* Begin PBXFileReference section */
 		D60E941F2412D68000F7BDA4 /* Banner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Banner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D60E94222412D68000F7BDA4 /* Banner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Banner.h; path = ../Banner/Banner.h; sourceTree = "<group>"; };
-		D60E94232412D68000F7BDA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Banner/Info.plist; sourceTree = "<group>"; };
 		D60E94302412D6D700F7BDA4 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D60E94322412D6D700F7BDA4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D60E94342412D6D700F7BDA4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +60,7 @@
 		D60E944B2412D72E00F7BDA4 /* FeedbackGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackGenerator.swift; sourceTree = "<group>"; };
 		D60E944C2412D72E00F7BDA4 /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		D60E944D2412D72E00F7BDA4 /* BannerDismissMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerDismissMode.swift; sourceTree = "<group>"; };
+		D60E94532412E02B00F7BDA4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				D60E942B2412D6BA00F7BDA4 /* Sources */,
-				D60E942A2412D6B500F7BDA4 /* Configs */,
+				D60E94522412E01200F7BDA4 /* Configs */,
 				D60E94312412D6D700F7BDA4 /* Example */,
 				D60E94202412D68000F7BDA4 /* Products */,
 				D60E94442412D6E800F7BDA4 /* Frameworks */,
@@ -101,15 +100,6 @@
 				D60E94302412D6D700F7BDA4 /* Example.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		D60E942A2412D6B500F7BDA4 /* Configs */ = {
-			isa = PBXGroup;
-			children = (
-				D60E94232412D68000F7BDA4 /* Info.plist */,
-				D60E94222412D68000F7BDA4 /* Banner.h */,
-			);
-			path = Configs;
 			sourceTree = "<group>";
 		};
 		D60E942B2412D6BA00F7BDA4 /* Sources */ = {
@@ -144,6 +134,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D60E94522412E01200F7BDA4 /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				D60E94532412E02B00F7BDA4 /* Info.plist */,
+			);
+			path = Configs;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -151,7 +149,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D60E94242412D68000F7BDA4 /* Banner.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +235,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D60E94542412E02B00F7BDA4 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,7 +481,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SEGQ3259G7;
-				INFOPLIST_FILE = Example/Info.plist;
+				INFOPLIST_FILE = Configs/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -502,7 +500,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SEGQ3259G7;
-				INFOPLIST_FILE = Example/Info.plist;
+				INFOPLIST_FILE = Configs/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

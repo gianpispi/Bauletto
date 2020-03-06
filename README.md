@@ -1,5 +1,3 @@
-# Banner
-
 <p align="center">
 	<video autoplay loop>
 		<source src="Assets/video.mp4" type="video/mp4">
