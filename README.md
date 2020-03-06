@@ -1,7 +1,5 @@
 <p align="center">
-	<video autoplay loop>
-		<source src="Assets/video.mp4" type="video/mp4">
-	</video>
+	<img src="Assets/movie.gif" alt="Banner">
 </p>
 
 <p align="center">
