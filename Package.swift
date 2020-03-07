@@ -4,12 +4,12 @@
 import PackageDescription
 
 let package = Package(
-    name: "Banner",
+    name: "Bauletto",
     platforms: [.iOS(.v10)],
     products: [
         .library(
-            name: "Banner",
-            targets: ["Banner"]),
+            name: "Bauletto",
+            targets: ["Bauletto"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -17,10 +17,10 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Banner",
+            name: "Bauletto",
             dependencies: []),
         .testTarget(
-            name: "BannerTests",
-            dependencies: ["Banner"]),
+            name: "BaulettoTests",
+            dependencies: ["Bauletto"]),
     ]
 )
