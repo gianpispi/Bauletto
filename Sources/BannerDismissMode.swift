@@ -1,5 +1,5 @@
 //
-//  BannerDismissMode.swift
+//  BaulettoDismissMode.swift
 //  
 //
 //  Created by Gianpiero Spinelli on 06/03/2020.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum BannerDismissMode: Equatable {
+public enum BaulettoDismissMode: Equatable {
     /// Hide the banner view after the default duration.
     case automatic
     

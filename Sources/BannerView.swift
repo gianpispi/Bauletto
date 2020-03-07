@@ -1,5 +1,5 @@
 //
-//  BannerView.swift
+//  BaulettoView.swift
 //  
 //
 //  Created by Gianpiero Spinelli on 05/03/2020.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-internal class BannerView: UIView {
+internal class BaulettoView: UIView {
     private var stackView: UIStackView = UIStackView()
     private var iconView: UIImageView = UIImageView()
     private var containerView: UIVisualEffectView = UIVisualEffectView()
@@ -19,7 +19,7 @@ internal class BannerView: UIView {
     }()
     
     /// Show time duration, seconds before the banner goes off.
-    public var dismissMode: BannerDismissMode = .automatic
+    public var dismissMode: BaulettoDismissMode = .automatic
     
     /// Icon that goes at the left of the text
     private var icon: UIImage? {
@@ -102,7 +102,7 @@ internal class BannerView: UIView {
         ])
     }
     
-    public func update(withSettings settings: BannerSettings?) {
+    public func update(withSettings settings: BaulettoSettings?) {
         self.icon = settings?.icon ?? self.icon
         self.title = settings?.title ?? self.title
         self.tintColor = settings?.tintColor ?? self.tintColor
@@ -131,23 +131,23 @@ internal class BannerView: UIView {
     }
 }
 
-public class Banner {
+public class Bauletto {
     public enum QueuePosition {
         case beginning, end
     }
     
-    fileprivate var bannerView: BannerView? = nil
+    fileprivate var bannerView: BaulettoView? = nil
     fileprivate var timer: Timer? = nil
     
-    private var queue: [BannerSettings?] = []
+    private var queue: [BaulettoSettings?] = []
     
-    fileprivate func getBannerView() -> BannerView {
-        let bannerView = BannerView()
+    fileprivate func getBannerView() -> BaulettoView {
+        let bannerView = BaulettoView()
         return bannerView
     }
     
     /// - `Banner` shared instance
-    public static var shared = Banner()
+    public static var shared = Bauletto()
     
     /// Flag to handle the slideIn animation on showup. By default it is connected to the Accessibility reduce motion setting.
     public var animated: Bool = !UIAccessibility.isReduceMotionEnabled
@@ -170,7 +170,7 @@ public class Banner {
     ///   - settings: BannerSettings which sets the banner's appearance (eg. tintColor, icon...)
     ///   - animated: Flag to handle the slideIn animation on showup. It overrides the shared  `animated` value.
     ///   - queuePosition: Position in the queue. Added at the end by default.
-    public static func show(withSettings settings: BannerSettings?, _ animated: Bool? = nil, queuePosition: QueuePosition = .end) {
+    public static func show(withSettings settings: BaulettoSettings?, _ animated: Bool? = nil, queuePosition: QueuePosition = .end) {
         if let animated = animated {
             shared.animated = animated
         }
@@ -179,7 +179,7 @@ public class Banner {
         shared.showNext()
     }
     
-    private static func showBannerView(withSettings settings: BannerSettings?) {
+    private static func showBannerView(withSettings settings: BaulettoSettings?) {
         shared.bannerView = shared.getBannerView()
         shared.bannerView?.update(withSettings: settings)
         
@@ -238,7 +238,7 @@ public class Banner {
         }
     }
     
-    private func prepareForHide(bannerView: BannerView) {
+    private func prepareForHide(bannerView: BaulettoView) {
         if bannerView.dismissMode != .never {
             self.timer = Timer.scheduledTimer(timeInterval: bannerView.dismissMode.duration, target: self, selector: #selector(self.hide), userInfo: nil, repeats: false)
         }
@@ -252,7 +252,14 @@ public class Banner {
         
         UIView.animate(withDuration: 0.25, animations: {
             if animated {
-                bannerView.transform = CGAffineTransform(translationX: 0, y: -(bannerView.bounds.height + window.safeAreaInsets.top + 10))
+                var y: CGFloat
+                if #available(iOS 11, *) {
+                    y = -(bannerView.bounds.height + window.safeAreaInsets.top + 10)
+                } else {
+                    y = -(bannerView.bounds.height + 10)
+                }
+                
+                bannerView.transform = CGAffineTransform(translationX: 0, y: y)
             } else {
                 bannerView.alpha = 0
             }
@@ -260,7 +267,7 @@ public class Banner {
     }
     
     @objc private func hide() {
-        Banner.hide()
+        Bauletto.hide()
     }
     
     /// Hides the banner view
@@ -299,7 +306,7 @@ public class Banner {
     }
     
     // MARK: - QUEUE
-    private func addToQueue(withSettings settings: BannerSettings?, position: QueuePosition) {
+    private func addToQueue(withSettings settings: BaulettoSettings?, position: QueuePosition) {
         switch position {
         case .beginning:
             queue.insert(settings, at: 0)
@@ -312,7 +319,7 @@ public class Banner {
         if let next = queue.first {
             if bannerView == nil {
                 queue.removeFirst()
-                Banner.showBannerView(withSettings: next)
+                Bauletto.showBannerView(withSettings: next)
             }
         }
     }
@@ -320,7 +327,7 @@ public class Banner {
     public func forceShowNext() {
         if let _ = queue.first {
             queue.removeFirst()
-            Banner.hide(completion: nil)
+            Bauletto.hide(completion: nil)
         }
     }
     
