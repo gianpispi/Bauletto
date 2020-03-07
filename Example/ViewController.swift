@@ -43,7 +43,7 @@ class ViewController: UIViewController {
         let settings3 = BaulettoSettings(icon: UIImage(systemName: "wifi.slash", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold)), title: "Wifi lost", tintColor: .red, backgroundStyle: .systemChromeMaterial, dismissMode: .never)
         Bauletto.show(withSettings: settings3)
         
-        // Hide the last banner after 10 seconds.
+        // Hide the last banner after 10 seconds, since the dismissMode is `.never`.
         DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
             Bauletto.hide()
         }
