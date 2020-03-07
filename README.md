@@ -1,6 +1,4 @@
-<p align="center">
-	<img src="Assets/movie.gif" alt="Bauletto">
-</p>
+![Bauletto](Assets/github.png)
 
 <p align="center">
     <img src="https://img.shields.io/badge/Swift-5.1-orange.svg" />
@@ -14,6 +12,11 @@
 </p>
 
 #### Lightweight iOS 13 badge like with ease.
+
+## Preview
+<p align="center">
+	<img src="Assets/movie.gif" alt="Bauletto">
+</p>
 
 ## Features
 - Highly customizable ✅
@@ -79,6 +82,21 @@ You can even change the dismissMode, which can be `.never`, `automatic` or `.cus
 ```swift
 let settings = BaulettoSettings(icon: UIImage(systemName: "checkmark.seal.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold)), title: "It works", dismissMode: .never)
 Bauletto.show(withSettings: settings)
+```
+
+Bauletto has a personal queue for the banners that will show up. When you show a banner you can select where in the queue it will be put. By default it is `.end`.
+
+```swift
+public enum QueuePosition {
+	case beginning, end
+}
+
+Bauletto.show(withSettings: settings, queuePosition: .beginning)
+```
+
+When you want to show up a new message immediately, add it by using the `show()` function, and then use:
+```swift
+Bauletto.shared.forceShowNext()
 ```
 
 Do you have a bunch of settings in the queue and you want to remove them? No problem.
