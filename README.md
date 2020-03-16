@@ -50,7 +50,7 @@ Once you have your Swift package set up, adding Bauletto as a dependency is as e
 
 ```swift
 dependencies: [
-.package(url: "https://github.com/gianpispi/Bauletto.git", from: "1.0.0")
+.package(url: "https://github.com/gianpispi/Bauletto.git", from: "1.0.6")
 ]
 ```
 
