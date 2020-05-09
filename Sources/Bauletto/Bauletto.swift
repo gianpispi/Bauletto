@@ -104,9 +104,11 @@ internal class BaulettoView: UIView {
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
         
+        self.containerView.isUserInteractionEnabled = true
+        
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapAction))
         
-        self.addGestureRecognizer(gestureRecognizer)
+        self.containerView.addGestureRecognizer(gestureRecognizer)
     }
     
     @objc private func handleTapAction() {
