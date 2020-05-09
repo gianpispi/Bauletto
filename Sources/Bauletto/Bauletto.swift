@@ -121,6 +121,7 @@ internal class BaulettoView: UIView {
         self.tintColor = settings?.tintColor ?? self.tintColor
         self.backgroundStyle = settings?.backgroundStyle ?? self.backgroundStyle
         self.dismissMode = settings?.dismissMode ?? self.dismissMode
+        self.action = action
     }
     
     public func animateIcon() {
