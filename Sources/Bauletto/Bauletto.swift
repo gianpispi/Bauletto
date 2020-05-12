@@ -50,6 +50,9 @@ internal class BaulettoView: UIView {
         }
     }
     
+    /// Action that needs to be performed when tapping Bauletto view
+    private var action: (() -> Void)? = nil
+    
     fileprivate override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -100,6 +103,16 @@ internal class BaulettoView: UIView {
             containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
+        
+        self.containerView.isUserInteractionEnabled = true
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapAction))
+        
+        self.containerView.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    @objc private func handleTapAction() {
+        action?()
     }
     
     public func update(withSettings settings: BaulettoSettings?) {
@@ -108,6 +121,7 @@ internal class BaulettoView: UIView {
         self.tintColor = settings?.tintColor ?? self.tintColor
         self.backgroundStyle = settings?.backgroundStyle ?? self.backgroundStyle
         self.dismissMode = settings?.dismissMode ?? self.dismissMode
+        self.action = settings?.action
     }
     
     public func animateIcon() {
