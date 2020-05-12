@@ -240,7 +240,7 @@ public class Bauletto {
             
             bannerView.animateIcon()
             
-            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [.curveEaseInOut, .allowUserInteraction], animations: {
                 bannerView.transform = .identity
             }, completion: completion)
         } else {
