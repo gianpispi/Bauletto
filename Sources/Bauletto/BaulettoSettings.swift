@@ -30,8 +30,7 @@ public struct BaulettoSettings {
     /// The optional action that needs to be performed when the view is tapped.
     public var action: (() -> Void)?
     
-    public init(icon: UIImage?, title: String?, backgroundStyle: UIBlurEffect.Style = .regular, dismissMode: BaulettoDismissMode = .automatic, hapticStyle: FeedbackGenerator.HapticStyle = .none,
-                action: (() -> Void)? = nil) {
+    public init(icon: UIImage?, title: String?, backgroundStyle: UIBlurEffect.Style = .regular, dismissMode: BaulettoDismissMode = .automatic, hapticStyle: FeedbackGenerator.HapticStyle = .none, action: (() -> Void)? = nil) {
         self.icon = icon
         self.title = title
         self.backgroundStyle = backgroundStyle
@@ -40,8 +39,7 @@ public struct BaulettoSettings {
         self.action = action
     }
     
-    public init(icon: UIImage?, title: String?, tintColor: UIColor, backgroundStyle: UIBlurEffect.Style = .regular, dismissMode: BaulettoDismissMode = .automatic, hapticStyle: FeedbackGenerator.HapticStyle = .none,
-               action: (() -> Void)? = nil) {
+    public init(icon: UIImage?, title: String?, tintColor: UIColor, backgroundStyle: UIBlurEffect.Style = .regular, dismissMode: BaulettoDismissMode = .automatic, hapticStyle: FeedbackGenerator.HapticStyle = .none, action: (() -> Void)? = nil) {
         self.icon = icon
         self.title = title
         self.tintColor = tintColor
