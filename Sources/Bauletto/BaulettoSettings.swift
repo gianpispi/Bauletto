@@ -40,8 +40,7 @@ public struct BaulettoSettings {
         self.action = action
     }
     
-    public init(icon: UIImage?, title: String?, tintColor: UIColor, backgroundStyle: UIBlurEffect.Style = .regular, dismissMode: BaulettoDismissMode = .automatic, hapticStyle: FeedbackGenerator.HapticStyle = .none,
-               action: (() -> Void)? = nil) {
+    public init(icon: UIImage?, title: String?, tintColor: UIColor, backgroundStyle: UIBlurEffect.Style = .regular, dismissMode: BaulettoDismissMode = .automatic, hapticStyle: FeedbackGenerator.HapticStyle = .none, action: (() -> Void)? = nil) {
         self.icon = icon
         self.title = title
         self.tintColor = tintColor
