@@ -27,19 +27,23 @@ public struct BaulettoSettings {
     /// Type of the haptic feedback fired when the banner is shown. None by default.
     public var hapticStyle: FeedbackGenerator.HapticStyle = .none
     
+    /// Duration of the fade in animation
+    public var fadeInDuration: TimeInterval = 1
+    
     /// The optional action that needs to be performed when the view is tapped.
     public var action: (() -> Void)?
     
-    public init(icon: UIImage?, title: String?, backgroundStyle: UIBlurEffect.Style = .regular, dismissMode: BaulettoDismissMode = .automatic, hapticStyle: FeedbackGenerator.HapticStyle = .none, action: (() -> Void)? = nil) {
+    public init(icon: UIImage?, title: String?, backgroundStyle: UIBlurEffect.Style = .regular, dismissMode: BaulettoDismissMode = .automatic, hapticStyle: FeedbackGenerator.HapticStyle = .none, action: (() -> Void)? = nil, fadeInDuration: TimeInterval = 1) {
         self.icon = icon
         self.title = title
         self.backgroundStyle = backgroundStyle
         self.dismissMode = dismissMode
         self.hapticStyle = hapticStyle
         self.action = action
+        self.fadeInDuration = fadeInDuration
     }
     
-    public init(icon: UIImage?, title: String?, tintColor: UIColor, backgroundStyle: UIBlurEffect.Style = .regular, dismissMode: BaulettoDismissMode = .automatic, hapticStyle: FeedbackGenerator.HapticStyle = .none, action: (() -> Void)? = nil) {
+    public init(icon: UIImage?, title: String?, tintColor: UIColor, backgroundStyle: UIBlurEffect.Style = .regular, dismissMode: BaulettoDismissMode = .automatic, hapticStyle: FeedbackGenerator.HapticStyle = .none, action: (() -> Void)? = nil, fadeInDuration: TimeInterval = 1) {
         self.icon = icon
         self.title = title
         self.tintColor = tintColor
@@ -47,5 +51,6 @@ public struct BaulettoSettings {
         self.dismissMode = dismissMode
         self.hapticStyle = hapticStyle
         self.action = action
+        self.fadeInDuration = fadeInDuration
     }
 }

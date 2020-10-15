@@ -15,11 +15,14 @@ internal class BaulettoView: UIView {
     private var titleLabel: UILabel = {
         let l = UILabel()
         l.font = UIFont.boldSystemFont(ofSize: UIFont.labelFontSize)
+        l.numberOfLines = 3
         return l
     }()
     
     /// Show time duration, seconds before the banner goes off.
     public var dismissMode: BaulettoDismissMode = .automatic
+    
+    public var fadeInAnimation: TimeInterval? = 1
     
     /// Icon that goes at the left of the text
     private var icon: UIImage? {
@@ -70,7 +73,7 @@ internal class BaulettoView: UIView {
         if #available(iOS 13, *) {
             tintColor = .secondaryLabel
             backgroundStyle = .systemChromeMaterial
-            icon = UIImage(systemName: "heart", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold))
+            icon = nil
         } else {
             tintColor = .darkGray
             backgroundStyle = .regular
@@ -116,18 +119,19 @@ internal class BaulettoView: UIView {
     }
     
     public func update(withSettings settings: BaulettoSettings?) {
-        self.icon = settings?.icon ?? self.icon
+        self.icon = settings?.icon
         self.title = settings?.title ?? self.title
         self.tintColor = settings?.tintColor ?? self.tintColor
         self.backgroundStyle = settings?.backgroundStyle ?? self.backgroundStyle
         self.dismissMode = settings?.dismissMode ?? self.dismissMode
         self.action = settings?.action
+        self.fadeInAnimation = settings?.fadeInDuration
     }
     
     public func animateIcon() {
         iconView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
         
-        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: fadeInAnimation ?? 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
             self.iconView.transform = .identity
         }, completion: nil)
     }
@@ -162,6 +166,11 @@ public class Bauletto {
     
     /// - `Banner` shared instance
     public static var shared = Bauletto()
+    
+    /// Currently shown Bauletto View
+    public var currentBanner: BaulettoView? {
+        return bannerView
+    }
     
     /// Flag to handle the slideIn animation on showup. By default it is connected to the Accessibility reduce motion setting.
     public var animated: Bool = !UIAccessibility.isReduceMotionEnabled
@@ -213,6 +222,8 @@ public class Bauletto {
         NSLayoutConstraint.activate([
             bannerView.topAnchor.constraint(equalTo: window.topAnchor, constant: topConstant),
             bannerView.centerXAnchor.constraint(equalTo: window.centerXAnchor),
+            bannerView.leadingAnchor.constraint(greaterThanOrEqualTo: window.leadingAnchor, constant: 20),
+            bannerView.trailingAnchor.constraint(lessThanOrEqualTo: window.trailingAnchor, constant: -20),
         ])
         
         if let style = settings?.hapticStyle {
@@ -220,7 +231,7 @@ public class Bauletto {
         }
         
         shared.playFadeInAnimation(animated: shared.animated) { _ in
-            shared.prepareForHide(bannerView: bannerView)
+            shared.prepareToHide(bannerView: bannerView)
         }
     }
     
@@ -252,7 +263,7 @@ public class Bauletto {
         }
     }
     
-    private func prepareForHide(bannerView: BaulettoView) {
+    private func prepareToHide(bannerView: BaulettoView) {
         if bannerView.dismissMode != .never {
             self.timer = Timer.scheduledTimer(timeInterval: bannerView.dismissMode.duration, target: self, selector: #selector(self.hide), userInfo: nil, repeats: false)
         }
@@ -332,7 +343,7 @@ public class Bauletto {
     private func showNext() {
         if let next = queue.first {
             if bannerView == nil {
-                queue.removeFirst()
+//                queue.removeFirst()
                 Bauletto.showBannerView(withSettings: next)
             }
         }

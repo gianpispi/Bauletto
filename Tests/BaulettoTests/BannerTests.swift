@@ -1,5 +1,5 @@
 import XCTest
-@testable import Banner
+@testable import Bauletto
 
 final class BannerTests: XCTestCase {
     func testExample() {
