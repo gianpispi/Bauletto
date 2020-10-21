@@ -112,6 +112,15 @@ Do you have a bunch of settings in the queue and you want to remove them? No pro
 Bauletto.shared.removeBannersInQueue()
 ```
 
+Bauletto can also have an action for a tap gesture. If you pass the `action` parameter, it will call the closure once the user tapped the banner. 
+
+```swift
+let settings = BaulettoSettings(icon: UIImage(systemName: "checkmark.seal.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold)), title: "It works", dismissMode: .never, action: { 
+    print("Hello, my name is Bauletto, and you tapped me!")
+})
+Bauletto.show(withSettings: settings)
+```
+
 ## Haptic Feedback Support
 You can also set a haptic feedback when the Bauletto shows up. By default, no haptic feedback will be generated. The types of haptic feedback are as follows:
 
