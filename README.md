@@ -85,6 +85,13 @@ let settings = BaulettoSettings(icon: UIImage(systemName: "checkmark.seal.fill",
 Bauletto.show(withSettings: settings)
 ```
 
+You can also change the duration of the show animation. By default it uses 1.0 second.
+
+```swift
+let settings = BaulettoSettings(icon: UIImage(systemName: "checkmark.seal.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold)), title: "It works", dismissMode: .never, fadeInDuration: 2.0)
+Bauletto.show(withSettings: settings)
+```
+
 Bauletto has a personal queue for the banners that will show up. When you show a banner you can select where in the queue it will be put. By default it is `.end`.
 
 ```swift
