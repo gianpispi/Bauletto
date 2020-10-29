@@ -15,9 +15,11 @@ internal class BaulettoView: UIView {
     private var titleLabel: UILabel = {
         let l = UILabel()
         l.font = UIFont.boldSystemFont(ofSize: UIFont.labelFontSize)
-        l.numberOfLines = 3
+        l.numberOfLines = 1
         return l
     }()
+    
+    private var viewTranslation = CGPoint(x: 0, y: 0)
     
     /// Show time duration, seconds before the banner goes off.
     public var dismissMode: BaulettoDismissMode = .automatic
@@ -112,6 +114,8 @@ internal class BaulettoView: UIView {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapAction))
         
         self.containerView.addGestureRecognizer(gestureRecognizer)
+        
+        addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleDismiss(sender:))))
     }
     
     @objc private func handleTapAction() {
@@ -120,6 +124,11 @@ internal class BaulettoView: UIView {
     
     public func update(withSettings settings: BaulettoSettings?) {
         self.icon = settings?.icon
+        
+        if let settings = settings, settings.icon == nil {
+            stackView.removeArrangedSubview(iconView)
+        }
+        
         self.title = settings?.title ?? self.title
         self.tintColor = settings?.tintColor ?? self.tintColor
         self.backgroundStyle = settings?.backgroundStyle ?? self.backgroundStyle
@@ -149,6 +158,31 @@ internal class BaulettoView: UIView {
     }
 }
 
+extension BaulettoView {
+    @objc func handleDismiss(sender: UIPanGestureRecognizer) {
+        switch sender.state {
+        case .changed:
+            viewTranslation = sender.translation(in: self)
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.transform = CGAffineTransform(translationX: 0, y: self.viewTranslation.y)
+            })
+        case .ended:
+            print(viewTranslation.y)
+            
+            if viewTranslation.y > 10 {
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    self.transform = .identity
+                })
+            } else {
+                Bauletto.hide()
+//                dismiss(animated: true, completion: nil)
+            }
+        default:
+            break
+        }
+    }
+}
+
 public class Bauletto {
     public enum QueuePosition {
         case beginning, end
@@ -168,7 +202,7 @@ public class Bauletto {
     public static var shared = Bauletto()
     
     /// Currently shown Bauletto View
-    public var currentBanner: BaulettoView? {
+    public var currentBanner: UIView? {
         return bannerView
     }
     
@@ -319,6 +353,8 @@ public class Bauletto {
                 
                 hideProgressHud()
                 
+                shared.queue.removeFirst()
+                
                 if shared.queue.isEmpty {
                     DispatchQueue.main.async {
                         completion?()
@@ -343,7 +379,6 @@ public class Bauletto {
     private func showNext() {
         if let next = queue.first {
             if bannerView == nil {
-//                queue.removeFirst()
                 Bauletto.showBannerView(withSettings: next)
             }
         }
@@ -351,7 +386,6 @@ public class Bauletto {
     
     public func forceShowNext() {
         if let _ = queue.first {
-            queue.removeFirst()
             Bauletto.hide(completion: nil)
         }
     }
