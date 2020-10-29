@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Bauletto",
+        "repositoryURL": "/Users/gianpierospinelli/Documents/SVILUPPO/Bauletto",
+        "state": {
+          "branch": "master",
+          "revision": "5b8cbe9cefbfdbe43362fe9cb8d10d6f9bddd088",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
