@@ -16,13 +16,13 @@ public struct BaulettoSettings {
     public var title: String?
     
     /// Tint color for icon and title.
-    public var tintColor: UIColor
+    public var tintColor: UIColor!
 
     /// Font for title.
-    public var font: UIFont = .boldSystemFont(ofSize: UIFont.labelFontSize)
+    public var font: UIFont! = .boldSystemFont(ofSize: UIFont.labelFontSize)
     
     /// Style of the background UIVisualEffectView.
-    public var backgroundStyle: UIBlurEffect.Style = .regular
+    public var backgroundStyle: UIBlurEffect.Style! = .regular
     
     /// Dismiss mode. Default is automatic
     public var dismissMode: BaulettoDismissMode = .automatic
@@ -35,4 +35,40 @@ public struct BaulettoSettings {
     
     /// The optional action that needs to be performed when the view is tapped.
     public var action: (() -> Void)?
+    
+    public init(icon: UIImage?,
+                title: String?,
+                backgroundStyle: UIBlurEffect.Style = .regular,
+                dismissMode: BaulettoDismissMode = .automatic,
+                hapticStyle: FeedbackGenerator.HapticStyle = .none,
+                action: (() -> Void)? = nil,
+                fadeInDuration: TimeInterval = 1) {
+        self.icon = icon
+        self.title = title
+        self.backgroundStyle = backgroundStyle
+        self.dismissMode = dismissMode
+        self.hapticStyle = hapticStyle
+        self.action = action
+        self.fadeInDuration = fadeInDuration
+    }
+    
+    public init(icon: UIImage?,
+                title: String?,
+                tintColor: UIColor,
+                font: UIFont,
+                backgroundStyle: UIBlurEffect.Style = .regular,
+                dismissMode: BaulettoDismissMode = .automatic,
+                hapticStyle: FeedbackGenerator.HapticStyle = .none,
+                action: (() -> Void)? = nil,
+                fadeInDuration: TimeInterval = 1) {
+        self.icon = icon
+        self.title = title
+        self.tintColor = tintColor
+        self.font = font
+        self.backgroundStyle = backgroundStyle
+        self.dismissMode = dismissMode
+        self.hapticStyle = hapticStyle
+        self.action = action
+        self.fadeInDuration = fadeInDuration
+    }
 }
