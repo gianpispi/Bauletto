@@ -17,6 +17,9 @@ public struct BaulettoSettings {
     
     /// Tint color for icon and title.
     public var tintColor: UIColor!
+
+    /// Font for title.
+    public var font: UIFont = .boldSystemFont(ofSize: UIFont.labelFontSize)
     
     /// Style of the background UIVisualEffectView.
     public var backgroundStyle: UIBlurEffect.Style! = .regular

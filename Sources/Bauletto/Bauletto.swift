@@ -14,7 +14,6 @@ internal class BaulettoView: UIView {
     private var containerView: UIVisualEffectView = UIVisualEffectView()
     private var titleLabel: UILabel = {
         let l = UILabel()
-        l.font = UIFont.boldSystemFont(ofSize: UIFont.labelFontSize)
         l.numberOfLines = 1
         return l
     }()
@@ -135,6 +134,7 @@ internal class BaulettoView: UIView {
         self.dismissMode = settings?.dismissMode ?? self.dismissMode
         self.action = settings?.action
         self.fadeInAnimation = settings?.fadeInDuration
+        self.titleLabel.font = settings?.font
     }
     
     public func animateIcon() {
