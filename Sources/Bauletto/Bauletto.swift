@@ -211,16 +211,14 @@ public class Bauletto {
     
     /// Getting the key window of the current app.
     /// Returns 'UIWindow'.
-    fileprivate let keyWindow: UIWindow? = {
-        if #available(iOS 13.0, *) {
-            return UIApplication.shared.connectedScenes
-                .first { $0.activationState == .foregroundActive }
-                .map { $0 as? UIWindowScene }
-                .map { $0?.windows.first } ?? UIApplication.shared.delegate?.window ?? nil
+    private var keyWindow: UIWindow? {
+        if #available(iOS 13.0, *),
+           let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
+           let window = scene.windows.first(where: { $0.isKeyWindow }) {
+            return window
         }
-
         return UIApplication.shared.delegate?.window ?? nil
-    }()
+    }
     
     /// Shows the banner view
     /// - Parameters:
