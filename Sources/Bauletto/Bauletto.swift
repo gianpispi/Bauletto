@@ -175,7 +175,6 @@ extension BaulettoView {
                 })
             } else {
                 Bauletto.hide()
-//                dismiss(animated: true, completion: nil)
             }
         default:
             break
@@ -211,16 +210,14 @@ public class Bauletto {
     
     /// Getting the key window of the current app.
     /// Returns 'UIWindow'.
-    fileprivate let keyWindow: UIWindow? = {
-        if #available(iOS 13.0, *) {
-            return UIApplication.shared.connectedScenes
-                .first { $0.activationState == .foregroundActive }
-                .map { $0 as? UIWindowScene }
-                .map { $0?.windows.first } ?? UIApplication.shared.delegate?.window ?? nil
+    private var keyWindow: UIWindow? {
+        if #available(iOS 13.0, *),
+           let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
+           let window = scene.windows.first(where: { $0.isKeyWindow }) {
+            return window
         }
-
         return UIApplication.shared.delegate?.window ?? nil
-    }()
+    }
     
     /// Shows the banner view
     /// - Parameters:
@@ -377,17 +374,17 @@ public class Bauletto {
     }
     
     private func showNext() {
-        if let next = queue.first {
-            if bannerView == nil {
-                Bauletto.showBannerView(withSettings: next)
-            }
+        guard
+            let next = queue.first,
+            bannerView?.superview == nil else {
+            return
         }
+        Bauletto.showBannerView(withSettings: next)
     }
     
     public func forceShowNext() {
-        if let _ = queue.first {
-            Bauletto.hide(completion: nil)
-        }
+        guard queue.first != nil else { return }
+        Bauletto.hide(completion: nil)
     }
     
     public func removeBannersInQueue() {
