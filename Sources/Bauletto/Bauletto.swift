@@ -175,7 +175,6 @@ extension BaulettoView {
                 })
             } else {
                 Bauletto.hide()
-//                dismiss(animated: true, completion: nil)
             }
         default:
             break
@@ -375,17 +374,17 @@ public class Bauletto {
     }
     
     private func showNext() {
-        if let next = queue.first {
-            if bannerView == nil {
-                Bauletto.showBannerView(withSettings: next)
-            }
+        guard
+            let next = queue.first,
+            bannerView?.superview == nil else {
+            return
         }
+        Bauletto.showBannerView(withSettings: next)
     }
     
     public func forceShowNext() {
-        if let _ = queue.first {
-            Bauletto.hide(completion: nil)
-        }
+        guard queue.first != nil else { return }
+        Bauletto.hide(completion: nil)
     }
     
     public func removeBannersInQueue() {
